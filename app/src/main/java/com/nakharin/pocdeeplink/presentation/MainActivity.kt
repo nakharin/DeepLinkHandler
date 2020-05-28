@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.nakharin.pocdeeplink.databinding.ActivityMainBinding
-import com.nakharin.pocdeeplink.shared.NavigationBuilder
+import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
 import org.koin.android.ext.android.inject

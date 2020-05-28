@@ -3,7 +3,7 @@ package com.nakharin.pocdeeplink.shared.deeplink.command
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.nakharin.pocdeeplink.shared.NavigationBuilder
+import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData

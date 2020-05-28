@@ -1,4 +1,4 @@
-package com.nakharin.pocdeeplink.shared
+package com.nakharin.pocdeeplink.shared.navigation
 
 import android.content.Context
 import android.content.Intent
