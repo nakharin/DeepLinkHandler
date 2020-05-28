@@ -1,5 +1,6 @@
 package com.nakharin.pocdeeplink.di
 
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
 import com.nakharin.pocdeeplink.shared.deeplink.handler.DefaultDeeplinkHandler
 import com.nakharin.pocdeeplink.shared.deeplink.processor.FoodDeeplinkProcessor
@@ -10,25 +11,31 @@ import org.koin.dsl.module
 val deeplinkModule = module {
 
     // DeeplinkProcessor
-    factory {
+    single {
         FoodDeeplinkProcessor(
             context = androidContext(),
+            deeplinkMatcher = get(),
             navigationHandler = get()
         )
     }
 
-    factory {
+    single {
         MainDeeplinkProcessor(
             context = androidContext(),
+            deeplinkMatcher = get(),
             navigationHandler = get()
         )
     }
 
     // DeeplinkHandler
-    factory {
+    single {
         DefaultDeeplinkHandler(
             processors = provideProcessors(get(), get())
         )
+    }
+
+    single {
+        DeeplinkMatcher()
     }
 }
 

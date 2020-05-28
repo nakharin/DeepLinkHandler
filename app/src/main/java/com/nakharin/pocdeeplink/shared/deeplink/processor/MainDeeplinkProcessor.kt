@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.nakharin.pocdeeplink.shared.NavigationHandler
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
 import com.nakharin.pocdeeplink.shared.deeplink.model.DeeplinkModel
 import com.nakharin.pocdeeplink.shared.deeplink.model.MainDeeplinkModel
 
 class MainDeeplinkProcessor(
     private val context: Context,
+    private val deeplinkMatcher: DeeplinkMatcher,
     private val navigationHandler: NavigationHandler
 ) : DeeplinkProcessor {
 
@@ -23,7 +25,7 @@ class MainDeeplinkProcessor(
     }
 
     override fun matches(uri: Uri): Boolean {
-        return uri.authority == "app"
+        return deeplinkMatcher.matches(TAG, uri)
     }
 
     override fun execute(uri: Uri) {
