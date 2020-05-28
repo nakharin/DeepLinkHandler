@@ -2,8 +2,8 @@ package com.nakharin.pocdeeplink.shared.deeplink
 
 import android.net.Uri
 import android.util.Log
-import com.nakharin.pocdeeplink.shared.deeplink.processor.FoodDeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.processor.MainDeeplinkProcessor
+import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.MainDeeplinkCommand
 
 class DeeplinkMatcher {
 
@@ -11,20 +11,25 @@ class DeeplinkMatcher {
         val TAG: String = DeeplinkMatcher::class.java.simpleName
     }
 
+    enum class Authority(val nameValue: String) {
+        APP("app"),
+        FOOD("food")
+    }
+
     fun matches(tag: String, uri: Uri): Boolean {
         val scheme = uri.scheme
         val authority = uri.authority
         val host = uri.host
         val params = uri.query
-        val id = uri.getQueryParameter(MainDeeplinkProcessor.QUERY_ID)
-        val restaurantId = uri.getQueryParameter(FoodDeeplinkProcessor.QUERY_RESTAURANT_ID)
         Log.i("Nakharin", "scheme: $scheme, authority: $authority, host: $host, params: $params")
         return when (tag) {
-            MainDeeplinkProcessor.TAG -> {
-                authority == "app"
+            MainDeeplinkCommand.TAG -> {
+                val id = uri.getQueryParameter(MainDeeplinkCommand.QUERY_ID)
+                authority == Authority.APP.nameValue
             }
-            FoodDeeplinkProcessor.TAG -> {
-                authority == "food"
+            FoodDeeplinkCommand.TAG -> {
+                val restaurantId = uri.getQueryParameter(FoodDeeplinkCommand.QUERY_RESTAURANT_ID)
+                authority == Authority.FOOD.nameValue
             }
             else -> false
         }

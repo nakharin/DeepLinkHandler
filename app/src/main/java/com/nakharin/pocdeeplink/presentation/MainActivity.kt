@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.nakharin.pocdeeplink.databinding.ActivityMainBinding
-import com.nakharin.pocdeeplink.shared.NavigationHandler
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.model.MainDeeplinkModel
+import com.nakharin.pocdeeplink.shared.NavigationBuilder
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
-    private val navigationHandler: NavigationHandler by inject()
+    private val navigationBuilder: NavigationBuilder by inject()
 
     private var id: String = ""
 
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleDeeplink(intent: Intent) {
-        val mainDeeplinkModel = intent.getParcelableExtra<MainDeeplinkModel>(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY)
-        mainDeeplinkModel?.let {
+        val mainDeeplinkData = intent.getParcelableExtra<MainDeeplinkData>(DeeplinkCommand.EXTRA_DEEP_LINK_KEY)
+        mainDeeplinkData?.let {
             id = it.id ?: ""
             updateUI()
         }
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     private val onClickListener: (v: View) -> Unit = {
         if (it == binding.mainBtnGoToFood) {
-            startActivity(navigationHandler.buildFoodActivity())
+            startActivity(navigationBuilder.buildFoodActivity())
         }
     }
 }

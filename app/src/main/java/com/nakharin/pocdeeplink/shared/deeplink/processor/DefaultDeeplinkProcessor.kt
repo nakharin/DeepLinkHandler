@@ -1,15 +1,15 @@
-package com.nakharin.pocdeeplink.shared.deeplink.handler
+package com.nakharin.pocdeeplink.shared.deeplink.processor
 
 import android.net.Uri
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHandler
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
 
-class DefaultDeeplinkHandler(
-    private val processors: Set<@JvmSuppressWildcards DeeplinkProcessor>
-) : DeeplinkHandler {
+class DefaultDeeplinkProcessor(
+    private val commands: Set<@JvmSuppressWildcards DeeplinkCommand>
+) : DeeplinkProcessor {
 
     override fun process(uri: Uri): Boolean {
-        processors.forEach {
+        commands.forEach {
             if (it.matches(uri)) {
                 it.execute(uri)
                 return true

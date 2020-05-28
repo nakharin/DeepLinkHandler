@@ -1,47 +1,48 @@
 package com.nakharin.pocdeeplink.di
 
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.handler.DefaultDeeplinkHandler
-import com.nakharin.pocdeeplink.shared.deeplink.processor.FoodDeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.processor.MainDeeplinkProcessor
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.processor.DefaultDeeplinkProcessor
+import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.MainDeeplinkCommand
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val deeplinkModule = module {
 
+    // DeeplinkCommand
+    single {
+        FoodDeeplinkCommand(
+            context = androidContext(),
+            deeplinkMatcher = get(),
+            navigationBuilder = get()
+        )
+    }
+
+    single {
+        MainDeeplinkCommand(
+            context = androidContext(),
+            deeplinkMatcher = get(),
+            navigationBuilder = get()
+        )
+    }
+
     // DeeplinkProcessor
     single {
-        FoodDeeplinkProcessor(
-            context = androidContext(),
-            deeplinkMatcher = get(),
-            navigationHandler = get()
+        DefaultDeeplinkProcessor(
+            commands = provideDefaultCommands(get(), get())
         )
     }
 
-    single {
-        MainDeeplinkProcessor(
-            context = androidContext(),
-            deeplinkMatcher = get(),
-            navigationHandler = get()
-        )
-    }
-
-    // DeeplinkHandler
-    single {
-        DefaultDeeplinkHandler(
-            processors = provideProcessors(get(), get())
-        )
-    }
-
+    // DeeplinkMatcher
     single {
         DeeplinkMatcher()
     }
 }
 
-fun provideProcessors(
-    mainDeeplinkProcessor: MainDeeplinkProcessor,
-    foodDeeplinkProcessor: FoodDeeplinkProcessor
-): Set<DeeplinkProcessor> {
-    return setOf(mainDeeplinkProcessor, foodDeeplinkProcessor)
+fun provideDefaultCommands(
+    mainDeeplinkCommand: MainDeeplinkCommand,
+    foodDeeplinkCommand: FoodDeeplinkCommand
+): Set<DeeplinkCommand> {
+    return setOf(mainDeeplinkCommand, foodDeeplinkCommand)
 }

@@ -1,11 +1,11 @@
-package com.nakharin.pocdeeplink.shared.deeplink.model
+package com.nakharin.pocdeeplink.shared.deeplink.data
 
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-open class DeeplinkModel(
+open class DeeplinkData(
     open val navigate: Navigate? = null,
     open val action: Action? = null,
     open val uri: Uri? = null

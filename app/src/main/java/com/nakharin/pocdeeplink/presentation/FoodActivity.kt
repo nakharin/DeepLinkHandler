@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nakharin.pocdeeplink.databinding.ActivityFoodBinding
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.model.FoodDeeplinkModel
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 
 class FoodActivity : AppCompatActivity() {
 
@@ -37,8 +37,8 @@ class FoodActivity : AppCompatActivity() {
     }
 
     private fun handleDeeplink(intent: Intent) {
-        val mainDeeplinkModel = intent.getParcelableExtra<FoodDeeplinkModel>(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY)
-        mainDeeplinkModel?.let {
+        val mainDeeplinkData = intent.getParcelableExtra<FoodDeeplinkData>(DeeplinkCommand.EXTRA_DEEP_LINK_KEY)
+        mainDeeplinkData?.let {
             restaurantId = it.restaurantId ?: ""
             updateUI()
         }
