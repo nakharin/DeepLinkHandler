@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleDeeplink(intent: Intent) {
-        val mainDeeplinkModel = intent.getParcelableExtra<MainDeeplinkModel>(DeeplinkProcessor.DEEP_LINK_EXTRA_KEY)
+        val mainDeeplinkModel = intent.getParcelableExtra<MainDeeplinkModel>(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY)
         mainDeeplinkModel?.let {
             id = it.id ?: ""
             updateUI()

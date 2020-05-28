@@ -30,8 +30,8 @@ class FoodDeeplinkProcessor(
     }
 
     override fun execute(uri: Uri) {
-        val navigate = uri.getQueryParameter(DeeplinkProcessor.NAVIGATE)
-        val action = uri.getQueryParameter(DeeplinkProcessor.ACTION)
+        val navigate = uri.getQueryParameter(DeeplinkProcessor.QUERY_NAVIGATE)
+        val action = uri.getQueryParameter(DeeplinkProcessor.QUERY_ACTION)
         val restaurantId = uri.getQueryParameter(QUERY_RESTAURANT_ID)
         val deeplinkModel = FoodDeeplinkModel(
             restaurantId = restaurantId,

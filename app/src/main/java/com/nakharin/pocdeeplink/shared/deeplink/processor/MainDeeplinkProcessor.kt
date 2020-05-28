@@ -29,8 +29,8 @@ class MainDeeplinkProcessor(
     }
 
     override fun execute(uri: Uri) {
-        val navigate = uri.getQueryParameter(DeeplinkProcessor.NAVIGATE)
-        val action = uri.getQueryParameter(DeeplinkProcessor.ACTION)
+        val navigate = uri.getQueryParameter(DeeplinkProcessor.QUERY_NAVIGATE)
+        val action = uri.getQueryParameter(DeeplinkProcessor.QUERY_ACTION)
         val id = uri.getQueryParameter(QUERY_ID)
         val deeplinkModel = MainDeeplinkModel(
             id = id,

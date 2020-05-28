@@ -37,7 +37,7 @@ class FoodActivity : AppCompatActivity() {
     }
 
     private fun handleDeeplink(intent: Intent) {
-        val mainDeeplinkModel = intent.getParcelableExtra<FoodDeeplinkModel>(DeeplinkProcessor.DEEP_LINK_EXTRA_KEY)
+        val mainDeeplinkModel = intent.getParcelableExtra<FoodDeeplinkModel>(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY)
         mainDeeplinkModel?.let {
             restaurantId = it.restaurantId ?: ""
             updateUI()

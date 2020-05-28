@@ -15,7 +15,7 @@ class NavigationHandlerImpl(
     override fun buildMainActivity(deeplinkModel: MainDeeplinkModel?, flags: Int?): Intent {
         return Intent(context, MainActivity::class.java).apply {
             if (deeplinkModel != null) {
-                this.putExtra(DeeplinkProcessor.DEEP_LINK_EXTRA_KEY, deeplinkModel)
+                this.putExtra(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY, deeplinkModel)
             }
 
             if (flags != null) {
@@ -27,7 +27,7 @@ class NavigationHandlerImpl(
     override fun buildFoodActivity(deeplinkModel: FoodDeeplinkModel?, flags: Int?): Intent {
         return Intent(context, FoodActivity::class.java).apply {
             if (deeplinkModel != null) {
-                putExtra(DeeplinkProcessor.DEEP_LINK_EXTRA_KEY, deeplinkModel)
+                putExtra(DeeplinkProcessor.EXTRA_DEEP_LINK_KEY, deeplinkModel)
             }
 
             if (flags != null) {
