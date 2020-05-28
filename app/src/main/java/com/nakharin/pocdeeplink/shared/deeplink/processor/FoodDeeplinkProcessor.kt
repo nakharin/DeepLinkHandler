@@ -18,7 +18,7 @@ class FoodDeeplinkProcessor(
 
     companion object {
         val TAG: String = FoodDeeplinkProcessor::class.java.simpleName
-        const val QUERY_RESTAURANT = "id"
+        const val QUERY_RESTAURANT_ID = "id"
     }
 
     override fun tag(): String {
@@ -32,7 +32,7 @@ class FoodDeeplinkProcessor(
     override fun execute(uri: Uri) {
         val navigate = uri.getQueryParameter(DeeplinkProcessor.NAVIGATE)
         val action = uri.getQueryParameter(DeeplinkProcessor.ACTION)
-        val restaurantId = uri.getQueryParameter(QUERY_RESTAURANT)
+        val restaurantId = uri.getQueryParameter(QUERY_RESTAURANT_ID)
         val deeplinkModel = FoodDeeplinkModel(
             restaurantId = restaurantId,
             navigate = DeeplinkModel.Navigate.toEnum(navigate),
