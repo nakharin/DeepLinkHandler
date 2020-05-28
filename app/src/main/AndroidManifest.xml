@@ -19,7 +19,7 @@
     </activity>
 
     <activity
-            android:name=".DeeplinkActivity"
+            android:name=".shared.deeplink.DeeplinkActivity"
             android:launchMode="singleTask">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />

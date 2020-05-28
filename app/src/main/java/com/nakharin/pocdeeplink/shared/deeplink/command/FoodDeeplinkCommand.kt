@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
 import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 

@@ -1,6 +1,6 @@
 package com.nakharin.pocdeeplink.shared.deeplink.di
 
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.command.MainDeeplinkCommand

@@ -1,4 +1,4 @@
-package com.nakharin.pocdeeplink
+package com.nakharin.pocdeeplink.shared.deeplink
 
 import android.content.Intent
 import android.os.Bundle

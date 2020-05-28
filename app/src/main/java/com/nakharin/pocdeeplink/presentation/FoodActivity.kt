@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nakharin.pocdeeplink.databinding.ActivityFoodBinding
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 
 class FoodActivity : AppCompatActivity() {

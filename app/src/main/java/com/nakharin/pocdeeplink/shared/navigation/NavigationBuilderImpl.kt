@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.nakharin.pocdeeplink.presentation.FoodActivity
 import com.nakharin.pocdeeplink.presentation.MainActivity
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
 

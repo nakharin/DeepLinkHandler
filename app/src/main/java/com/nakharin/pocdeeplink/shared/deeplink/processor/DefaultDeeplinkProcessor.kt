@@ -1,8 +1,7 @@
 package com.nakharin.pocdeeplink.shared.deeplink.processor
 
 import android.net.Uri
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkProcessor
-import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkCommand
+import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 
 class DefaultDeeplinkProcessor(
     private val commands: Set<@JvmSuppressWildcards DeeplinkCommand>

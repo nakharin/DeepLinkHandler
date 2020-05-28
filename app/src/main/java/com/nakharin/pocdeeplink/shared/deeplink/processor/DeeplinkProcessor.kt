@@ -1,4 +1,4 @@
-package com.nakharin.pocdeeplink.shared.deeplink
+package com.nakharin.pocdeeplink.shared.deeplink.processor
 
 import android.net.Uri
 
