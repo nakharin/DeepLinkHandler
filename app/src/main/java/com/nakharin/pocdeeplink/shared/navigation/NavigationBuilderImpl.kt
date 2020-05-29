@@ -2,6 +2,7 @@ package com.nakharin.pocdeeplink.shared.navigation
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import com.nakharin.pocdeeplink.presentation.FoodActivity
 import com.nakharin.pocdeeplink.presentation.MainActivity
 import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
@@ -12,11 +13,9 @@ class NavigationBuilderImpl(
     private val context: Context
 ) : NavigationBuilder {
 
-    override fun buildMainActivity(deeplinkData: MainDeeplinkData?, flags: Int?): Intent {
+    override fun buildMainActivity(data: Bundle?, flags: Int?): Intent {
         return Intent(context, MainActivity::class.java).apply {
-            if (deeplinkData != null) {
-                this.putExtra(DeeplinkCommand.EXTRA_DEEP_LINK_KEY, deeplinkData)
-            }
+            data?.also { this.putExtras(it) }
 
             if (flags != null) {
                 this.flags = flags
@@ -24,11 +23,9 @@ class NavigationBuilderImpl(
         }
     }
 
-    override fun buildFoodActivity(deeplinkData: FoodDeeplinkData?, flags: Int?): Intent {
+    override fun buildFoodActivity(data: Bundle?, flags: Int?): Intent {
         return Intent(context, FoodActivity::class.java).apply {
-            if (deeplinkData != null) {
-                this.putExtra(DeeplinkCommand.EXTRA_DEEP_LINK_KEY, deeplinkData)
-            }
+            data?.also { this.putExtras(it) }
 
             if (flags != null) {
                 this.flags = flags
