@@ -14,5 +14,4 @@ interface DeeplinkCommand {
 
     fun execute(uri: Uri)
 
-    fun tag(): String
 }

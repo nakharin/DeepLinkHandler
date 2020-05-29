@@ -10,23 +10,14 @@ import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
 import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 
 class FoodDeeplinkCommand(
+    matcher: (deeplink: Uri) -> Matcher,
     private val context: Context,
-    private val deeplinkMatcher: DeeplinkMatcher,
     private val navigationBuilder: NavigationBuilder
-) : DeeplinkCommand {
+) : MatcherDeeplinkCommand(matcher) {
 
     companion object {
-        val TAG: String = FoodDeeplinkCommand::class.java.simpleName
-
+        val TAG: String = this::class.java.simpleName
         const val QUERY_RESTAURANT_ID = "id"
-    }
-
-    override fun tag(): String {
-        return TAG
-    }
-
-    override fun matches(uri: Uri): Boolean {
-        return deeplinkMatcher.matches(TAG, uri)
     }
 
     override fun execute(uri: Uri) {

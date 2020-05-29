@@ -7,42 +7,41 @@ import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
 import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
+import com.nakharin.pocdeeplink.shared.deeplink.processor.DeeplinkProcessor
 
 class MainDeeplinkCommand(
     private val context: Context,
-    private val deeplinkMatcher: DeeplinkMatcher,
-    private val navigationBuilder: NavigationBuilder
-) : DeeplinkCommand {
+    private val navigationBuilder: NavigationBuilder,
+    private val commands: Set<@JvmSuppressWildcards DeeplinkCommand>
+) : MatcherDeeplinkCommand({ deeplink ->
+    deeplink.matcher()
+}), DeeplinkProcessor {
 
     companion object {
-        val TAG: String = MainDeeplinkCommand::class.java.simpleName
-
-        const val QUERY_ID = "id"
-    }
-
-    override fun tag(): String {
-        return TAG
-    }
-
-    override fun matches(uri: Uri): Boolean {
-        return deeplinkMatcher.matches(TAG, uri)
+        val TAG: String = this::class.java.simpleName
     }
 
     override fun execute(uri: Uri) {
-        val navigate = uri.getQueryParameter(DeeplinkCommand.QUERY_NAVIGATE)
-        val action = uri.getQueryParameter(DeeplinkCommand.QUERY_ACTION)
-        val id = uri.getQueryParameter(QUERY_ID)
-        val deeplinkData = MainDeeplinkData(
-            id = id,
-            navigate = DeeplinkData.Navigate.toEnum(navigate),
-            action = DeeplinkData.Action.toEnum(action),
-            uri = uri
-        )
+
+        // open app
         context.startActivity(
             navigationBuilder.buildMainActivity(
-                deeplinkData = deeplinkData,
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             )
         )
+
+        // do something more?
+        process(uri)
+
+    }
+
+    override fun process(uri: Uri): Boolean {
+        commands.forEach {
+            if (it.matches(uri)) {
+                it.execute(uri)
+                return true
+            }
+        }
+        return false
     }
 }
