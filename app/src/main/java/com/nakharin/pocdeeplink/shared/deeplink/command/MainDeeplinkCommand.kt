@@ -48,8 +48,9 @@ class MainDeeplinkCommand(
 
         val intent = navigationBuilder.buildMainActivity(
             deeplinkData = deeplinkData,
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = null // Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         )
-        context.startActivity(intent)
+//        context.startActivity(intent)
+        deeplinkHelper.startActivity(intent)
     }
 }

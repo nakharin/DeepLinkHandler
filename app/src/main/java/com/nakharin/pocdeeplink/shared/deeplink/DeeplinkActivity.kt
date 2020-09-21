@@ -15,6 +15,7 @@ class DeeplinkActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         deeplinkHelper.setHasStack(!isTaskRoot)
+        deeplinkHelper.setActivity(this@DeeplinkActivity)
 
         intent?.let {
             handleIntent(it)
