@@ -3,6 +3,8 @@ package com.nakharin.pocdeeplink.shared.deeplink
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ProcessLifecycleOwner
 
 class DeeplinkHelper {
 
@@ -16,22 +18,13 @@ class DeeplinkHelper {
         this.activity?.startActivity(intent)
     }
 
-    private var isHasStack: Boolean = false
-
-    fun setHasStack(isHasStack: Boolean) {
-        this.isHasStack = isHasStack
-    }
-
+    // https://developer.android.com/reference/androidx/lifecycle/ProcessLifecycleOwner
     fun isHasStack(): Boolean {
-        return this.isHasStack
+        return ProcessLifecycleOwner.get().lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
     }
-    
+
     fun isShouldStayOnCurrentScreen(uri: Uri?): Boolean {
         // TODO handle
         return false
-    }
-
-    fun clear() {
-        this.isHasStack = false
     }
 }

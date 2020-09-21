@@ -14,7 +14,6 @@ class DeeplinkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        deeplinkHelper.setHasStack(!isTaskRoot)
         deeplinkHelper.setActivity(this@DeeplinkActivity)
 
         intent?.let {

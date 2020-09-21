@@ -62,4 +62,6 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     // Koin AndroidX Experimental features
     implementation "org.koin:koin-androidx-ext:$koin_version"
+    // Lifecycle Process
+    implementation 'androidx.lifecycle:lifecycle-process:2.2.0'
 }

@@ -41,14 +41,14 @@ class MainDeeplinkCommand(
             uri = uri
         )
 
+        var flags: Int? = null
         if (!deeplinkHelper.isHasStack()) {
-            deeplinkHelper.clear()
-            // if has stack
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }
 
         val intent = navigationBuilder.buildMainActivity(
             deeplinkData = deeplinkData,
-            flags = null // Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = flags
         )
 //        context.startActivity(intent)
         deeplinkHelper.startActivity(intent)
