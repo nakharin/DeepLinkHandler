@@ -3,6 +3,7 @@ package com.nakharin.pocdeeplink.shared.deeplink.command
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
 import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
@@ -10,6 +11,7 @@ import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
 
 class MainDeeplinkCommand(
     private val context: Context,
+    private val deeplinkHelper: DeeplinkHelper,
     private val deeplinkMatcher: DeeplinkMatcher,
     private val navigationBuilder: NavigationBuilder
 ) : DeeplinkCommand {
@@ -38,11 +40,16 @@ class MainDeeplinkCommand(
             action = DeeplinkData.Action.toEnum(action),
             uri = uri
         )
-        context.startActivity(
-            navigationBuilder.buildMainActivity(
-                deeplinkData = deeplinkData,
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            )
+
+        if (!deeplinkHelper.isHasStack()) {
+            deeplinkHelper.clear()
+            // if has stack
+        }
+
+        val intent = navigationBuilder.buildMainActivity(
+            deeplinkData = deeplinkData,
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         )
+        context.startActivity(intent)
     }
 }

@@ -4,6 +4,7 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
 import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
@@ -11,6 +12,7 @@ import com.nakharin.pocdeeplink.shared.deeplink.data.FoodDeeplinkData
 
 class FoodDeeplinkCommand(
     private val context: Context,
+    private val deeplinkHelper: DeeplinkHelper,
     private val deeplinkMatcher: DeeplinkMatcher,
     private val navigationBuilder: NavigationBuilder
 ) : DeeplinkCommand {
@@ -40,7 +42,10 @@ class FoodDeeplinkCommand(
             uri = uri
         )
 
-        handleTaskStackBuilder()
+        if (!deeplinkHelper.isHasStack()) {
+            deeplinkHelper.clear()
+            handleTaskStackBuilder()
+        }
 
         val intent = navigationBuilder.buildFoodActivity(
             deeplinkData = deeplinkData,

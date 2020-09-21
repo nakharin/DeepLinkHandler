@@ -1,5 +1,6 @@
 package com.nakharin.pocdeeplink.shared.deeplink.di
 
+import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
 import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
@@ -16,6 +17,7 @@ object DeeplinkModule {
         single {
             FoodDeeplinkCommand(
                 context = androidContext(),
+                deeplinkHelper = get(),
                 deeplinkMatcher = get(),
                 navigationBuilder = get()
             )
@@ -24,6 +26,7 @@ object DeeplinkModule {
         single {
             MainDeeplinkCommand(
                 context = androidContext(),
+                deeplinkHelper = get(),
                 deeplinkMatcher = get(),
                 navigationBuilder = get()
             )
@@ -32,13 +35,21 @@ object DeeplinkModule {
         // DeeplinkProcessor
         single {
             DefaultDeeplinkProcessor(
-                commands = provideDefaultCommands(get(), get())
+                commands = provideDefaultCommands(
+                    mainDeeplinkCommand = get(),
+                    foodDeeplinkCommand = get()
+                )
             )
         }
 
         // DeeplinkMatcher
         single {
             DeeplinkMatcher()
+        }
+
+        // DeeplinkHelper
+        single {
+            DeeplinkHelper()
         }
     }
 

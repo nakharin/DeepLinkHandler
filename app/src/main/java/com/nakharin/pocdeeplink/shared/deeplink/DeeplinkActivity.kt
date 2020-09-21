@@ -9,9 +9,13 @@ import org.koin.android.ext.android.inject
 class DeeplinkActivity : AppCompatActivity() {
 
     private val defaultDeeplinkProcessor: DefaultDeeplinkProcessor by inject()
+    private val deeplinkHelper: DeeplinkHelper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        deeplinkHelper.setHasStack(!isTaskRoot)
+
         intent?.let {
             handleIntent(it)
         }
