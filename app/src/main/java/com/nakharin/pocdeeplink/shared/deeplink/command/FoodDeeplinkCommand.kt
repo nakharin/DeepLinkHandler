@@ -3,8 +3,6 @@ package com.nakharin.pocdeeplink.shared.deeplink.command
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.net.Uri
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ProcessLifecycleOwner
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
@@ -48,8 +46,7 @@ class FoodDeeplinkCommand(
         }
 
         val intent = navigationBuilder.buildFoodActivity(
-            deeplinkData = deeplinkData,
-            flags = null // Intent.FLAG_ACTIVITY_NEW_TASK
+            deeplinkData = deeplinkData
         )
 //        context.startActivity(intent)
         deeplinkHelper.startActivity(intent)
