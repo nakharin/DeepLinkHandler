@@ -8,7 +8,7 @@ import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 /**
  * How to test
  * com.nakharin://app?id=1111A
- * com.nakharin://food?id=2222B
+ * com.nakharin://food?id=2222B?coupon
  */
 class DefaultDeeplinkProcessor(
     private val commands: Set<@JvmSuppressWildcards DeeplinkCommand>
@@ -18,7 +18,6 @@ class DefaultDeeplinkProcessor(
         commands.forEach {
             if (it.matches(uri)) {
                 it.execute(uri)
-                return true
             }
         }
         return false

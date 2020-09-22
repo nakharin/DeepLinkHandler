@@ -3,6 +3,7 @@ package com.nakharin.pocdeeplink.shared.deeplink.di
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
 import com.nakharin.pocdeeplink.shared.deeplink.command.DeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
+import com.nakharin.pocdeeplink.shared.deeplink.command.CouponDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.command.MainDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.processor.DefaultDeeplinkProcessor
@@ -14,6 +15,13 @@ object DeeplinkModule {
     val module = module {
 
         // DeeplinkCommand
+        single {
+            CouponDeeplinkCommand(
+                context = androidContext(),
+                deeplinkMatcher = get()
+            )
+        }
+
         single {
             FoodDeeplinkCommand(
                 context = androidContext(),
@@ -37,7 +45,8 @@ object DeeplinkModule {
             DefaultDeeplinkProcessor(
                 commands = provideDefaultCommands(
                     mainDeeplinkCommand = get(),
-                    foodDeeplinkCommand = get()
+                    foodDeeplinkCommand = get(),
+                    couponDeeplinkCommand = get()
                 )
             )
         }
@@ -55,8 +64,9 @@ object DeeplinkModule {
 
     private fun provideDefaultCommands(
         mainDeeplinkCommand: MainDeeplinkCommand,
-        foodDeeplinkCommand: FoodDeeplinkCommand
+        foodDeeplinkCommand: FoodDeeplinkCommand,
+        couponDeeplinkCommand: CouponDeeplinkCommand
     ): Set<DeeplinkCommand> {
-        return setOf(mainDeeplinkCommand, foodDeeplinkCommand)
+        return setOf(mainDeeplinkCommand, foodDeeplinkCommand, couponDeeplinkCommand)
     }
 }
