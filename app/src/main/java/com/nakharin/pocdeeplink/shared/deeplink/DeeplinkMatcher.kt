@@ -6,6 +6,8 @@ import com.nakharin.pocdeeplink.shared.deeplink.command.CouponDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.command.FoodDeeplinkCommand
 import com.nakharin.pocdeeplink.shared.deeplink.command.MainDeeplinkCommand
 
+// lineman://app/food?coupon=FOOD100
+// lineman://app/food/r/id=11&coupon=FOOD100
 class DeeplinkMatcher {
 
     companion object {
@@ -24,11 +26,12 @@ class DeeplinkMatcher {
         val params = uri.query
         val path = uri.path
         val pathSegments = uri.pathSegments
-        Log.i("Nakharin", "scheme: $scheme, authority: $authority, host: $host, path: $path, params: $params")
+        Log.i(
+            "Nakharin",
+            "\nscheme: $scheme\n authority: $authority\n host: $host\n path: $path\n params: $params\n pathSegments: $pathSegments"
+        )
         return when (tag) {
             CouponDeeplinkCommand.TAG -> {
-                // lineman://app/food?coupon=FOOD100
-                // lineman://app/food/r/id=11&coupon=FOOD100
                 val couponCode = uri.getQueryParameter(CouponDeeplinkCommand.QUERY_COUPON)
                 !couponCode.isNullOrEmpty()
             }

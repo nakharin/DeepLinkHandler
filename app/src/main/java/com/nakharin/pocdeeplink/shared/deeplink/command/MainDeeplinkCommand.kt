@@ -1,13 +1,14 @@
 package com.nakharin.pocdeeplink.shared.deeplink.command
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkHelper
-import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 import com.nakharin.pocdeeplink.shared.deeplink.DeeplinkMatcher
 import com.nakharin.pocdeeplink.shared.deeplink.data.DeeplinkData
 import com.nakharin.pocdeeplink.shared.deeplink.data.MainDeeplinkData
+import com.nakharin.pocdeeplink.shared.navigation.NavigationBuilder
 
 class MainDeeplinkCommand(
     private val context: Context,
@@ -22,15 +23,11 @@ class MainDeeplinkCommand(
         const val QUERY_ID = "id"
     }
 
-    override fun tag(): String {
-        return TAG
-    }
-
     override fun matches(uri: Uri): Boolean {
         return deeplinkMatcher.matches(TAG, uri)
     }
 
-    override fun execute(uri: Uri) {
+    override fun execute(activity: Activity?, uri: Uri) {
         val navigate = uri.getQueryParameter(DeeplinkCommand.QUERY_NAVIGATE)
         val action = uri.getQueryParameter(DeeplinkCommand.QUERY_ACTION)
         val id = uri.getQueryParameter(QUERY_ID)
@@ -50,7 +47,6 @@ class MainDeeplinkCommand(
             deeplinkData = deeplinkData,
             flags = flags
         )
-//        context.startActivity(intent)
-        deeplinkHelper.startActivity(intent)
+        activity?.startActivity(intent)
     }
 }

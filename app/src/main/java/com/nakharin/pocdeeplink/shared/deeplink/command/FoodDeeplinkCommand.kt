@@ -1,5 +1,6 @@
 package com.nakharin.pocdeeplink.shared.deeplink.command
 
+import android.app.Activity
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.net.Uri
@@ -22,15 +23,11 @@ class FoodDeeplinkCommand(
         const val QUERY_RESTAURANT_ID = "id"
     }
 
-    override fun tag(): String {
-        return TAG
-    }
-
     override fun matches(uri: Uri): Boolean {
         return deeplinkMatcher.matches(TAG, uri)
     }
 
-    override fun execute(uri: Uri) {
+    override fun execute(activity: Activity?, uri: Uri) {
         val navigate = uri.getQueryParameter(DeeplinkCommand.QUERY_NAVIGATE)
         val action = uri.getQueryParameter(DeeplinkCommand.QUERY_ACTION)
         val restaurantId = uri.getQueryParameter(QUERY_RESTAURANT_ID)
@@ -48,13 +45,12 @@ class FoodDeeplinkCommand(
         val intent = navigationBuilder.buildFoodActivity(
             deeplinkData = deeplinkData
         )
-//        context.startActivity(intent)
-        deeplinkHelper.startActivity(intent)
+        activity?.startActivity(intent)
     }
 
     private fun handleTaskStackBuilder() {
         TaskStackBuilder.create(context)
-            .addNextIntentWithParentStack(navigationBuilder.buildMainActivity())
+            .addNextIntent(navigationBuilder.buildMainActivity())
             .startActivities()
     }
 }

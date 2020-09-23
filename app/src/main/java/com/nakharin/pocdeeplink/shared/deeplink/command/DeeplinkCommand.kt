@@ -1,5 +1,6 @@
 package com.nakharin.pocdeeplink.shared.deeplink.command
 
+import android.app.Activity
 import android.net.Uri
 
 interface DeeplinkCommand {
@@ -12,7 +13,5 @@ interface DeeplinkCommand {
 
     fun matches(uri: Uri): Boolean
 
-    fun execute(uri: Uri)
-
-    fun tag(): String
+    fun execute(activity: Activity?, uri: Uri)
 }

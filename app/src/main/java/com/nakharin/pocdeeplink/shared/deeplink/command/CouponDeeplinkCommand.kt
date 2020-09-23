@@ -1,5 +1,6 @@
 package com.nakharin.pocdeeplink.shared.deeplink.command
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
@@ -16,15 +17,11 @@ open class CouponDeeplinkCommand(
         const val QUERY_COUPON = "coupon"
     }
 
-    override fun tag(): String {
-        return TAG
-    }
-
     override fun matches(uri: Uri): Boolean {
         return deeplinkMatcher.matches(TAG, uri)
     }
 
-    override fun execute(uri: Uri) {
+    override fun execute(activity: Activity?, uri: Uri) {
         val coupon = uri.getQueryParameter(QUERY_COUPON)
         Toast.makeText(context, "Save Coupon : $coupon", Toast.LENGTH_SHORT)
             .show()
